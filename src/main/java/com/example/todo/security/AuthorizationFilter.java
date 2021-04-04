@@ -18,7 +18,10 @@ import java.util.ArrayList;
 
 import static com.example.todo.security.SecurityConstants.*;
 
+
+
 public class AuthorizationFilter extends BasicAuthenticationFilter {
+
 
     public AuthorizationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);

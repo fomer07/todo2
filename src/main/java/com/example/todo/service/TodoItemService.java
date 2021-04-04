@@ -2,6 +2,8 @@ package com.example.todo.service;
 
 import com.example.todo.model.TodoItem;
 import com.example.todo.repository.TodoItemRepository;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,10 +11,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor(onConstructor = @__({@Autowired,@NonNull}))
 public class TodoItemService {
 
-    @Autowired
-    private TodoItemRepository todoItemRepository;
+
+    private final TodoItemRepository todoItemRepository;
 
     public TodoItem save(TodoItem todoItem){
         return todoItemRepository.save(todoItem);

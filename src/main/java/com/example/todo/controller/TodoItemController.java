@@ -2,6 +2,8 @@ package com.example.todo.controller;
 
 import com.example.todo.model.TodoItem;
 import com.example.todo.service.TodoItemService;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,9 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/todo")
+@RequiredArgsConstructor(onConstructor = @__({@Autowired,@NonNull}))
 public class TodoItemController {
-    @Autowired
-    private TodoItemService todoItemService;
+
+    private final TodoItemService todoItemService;
 
     @GetMapping("/item/{id}")
     public TodoItem getOne(@PathVariable Long id){

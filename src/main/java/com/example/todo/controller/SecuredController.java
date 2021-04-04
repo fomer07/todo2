@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 public class SecuredController {
 
-
+    //here is only for test for jwt authentication
     @GetMapping
     public ResponseEntity reachSecureEndpoint(){
         return new ResponseEntity("if you are reading this you have reached out secure point", HttpStatus.OK);

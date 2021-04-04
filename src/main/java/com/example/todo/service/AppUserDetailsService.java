@@ -2,6 +2,8 @@ package com.example.todo.service;
 
 import com.example.todo.model.User;
 import com.example.todo.repository.UserRepository;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,15 +13,12 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 
 @Service
+@RequiredArgsConstructor(onConstructor = @__({@Autowired,@NonNull}))
 public class AppUserDetailsService implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
 
+    private final UserRepository userRepository;
 
-    public AppUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     public UserDetails loadUserByUsername (String username) throws UsernameNotFoundException {

@@ -5,6 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,15 +26,13 @@ import java.util.Date;
 import static com.example.todo.security.SecurityConstants.EXPIRATION_TIME;
 import static com.example.todo.security.SecurityConstants.KEY;
 
-
+@RequiredArgsConstructor(onConstructor = @__({@Autowired,@NonNull}))
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
 
-    private AuthenticationManager authenticationManager;
+    private  final AuthenticationManager authenticationManager;
 
-    public AuthenticationFilter(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
-    }
+
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
