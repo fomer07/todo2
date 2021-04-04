@@ -23,13 +23,13 @@ public class TodoItemController {
     }
 
     @GetMapping("/item/all")
-    public List<TodoItem> getAll(){
-        return todoItemService.findAll();
+    public List<TodoItem> getAll(@RequestHeader("Authorization") String token){
+        return todoItemService.findAll(token);
     }
 
     @PostMapping("/item/new")
-    public ResponseEntity<TodoItem> save(@RequestBody TodoItem item){
-        return ResponseEntity.ok(todoItemService.save(item));
+    public ResponseEntity<TodoItem> save(@RequestBody TodoItem item,@RequestHeader("Authorization") String token){
+        return ResponseEntity.ok(todoItemService.save(item,token));
     }
 
     @PutMapping("/item/edit/{id}")

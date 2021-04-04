@@ -24,4 +24,7 @@ public class TodoItem {
 
     private boolean isDone = false;
 
+    private Long userId;
+
+
 }

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -22,6 +23,10 @@ public class User {
     private String password;
 
     private String email;
+
+    @OneToMany
+    @JoinColumn(name = "userId",referencedColumnName = "id")
+    private List<TodoItem> todos;
 
     public User(String username, String password, String email) {
         this.username = username;

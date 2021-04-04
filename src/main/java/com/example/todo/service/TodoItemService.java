@@ -1,10 +1,12 @@
 package com.example.todo.service;
 
 import com.example.todo.model.TodoItem;
+import com.example.todo.model.User;
 import com.example.todo.repository.TodoItemRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,13 +18,16 @@ public class TodoItemService {
 
 
     private final TodoItemRepository todoItemRepository;
+    private final UserService userService;
 
-    public TodoItem save(TodoItem todoItem){
+    public TodoItem save(TodoItem todoItem,String token){
+        todoItem.setUserId(userService.getCurrent(token).getId());
         return todoItemRepository.save(todoItem);
     }
 
     public TodoItem completed(Long id){
         TodoItem todoItem = todoItemRepository.findById(id).get();
+        SecurityContextHolder.getContext().getAuthentication();
         if (todoItem !=null){
             todoItem.setDone(true);
             todoItemRepository.save(todoItem);
@@ -41,8 +46,8 @@ public class TodoItemService {
         return false;
     }
 
-    public List<TodoItem> findAll(){
-        return todoItemRepository.findAll();
+    public List<TodoItem> findAll(String token){
+        return todoItemRepository.findByUserId(userService.getCurrent(token).getId());
     }
 
     public TodoItem getOne(Long id){
