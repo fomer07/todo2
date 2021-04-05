@@ -27,7 +27,7 @@ public class TodoItemService {
 
     public TodoItem completed(Long id){
         TodoItem todoItem = todoItemRepository.findById(id).get();
-        SecurityContextHolder.getContext().getAuthentication();
+
         if (todoItem !=null){
             todoItem.setDone(true);
             todoItemRepository.save(todoItem);
