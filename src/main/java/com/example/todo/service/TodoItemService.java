@@ -1,16 +1,16 @@
 package com.example.todo.service;
 
 import com.example.todo.model.TodoItem;
-import com.example.todo.model.User;
+
 import com.example.todo.repository.TodoItemRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 @RequiredArgsConstructor(onConstructor = @__({@Autowired,@NonNull}))
@@ -22,6 +22,9 @@ public class TodoItemService {
 
     public TodoItem save(TodoItem todoItem,String token){
         todoItem.setUserId(userService.getCurrent(token).getId());
+        return todoItemRepository.save(todoItem);
+    }
+    public TodoItem saveWithoutId(TodoItem todoItem){
         return todoItemRepository.save(todoItem);
     }
 
@@ -48,6 +51,10 @@ public class TodoItemService {
 
     public List<TodoItem> findAll(String token){
         return todoItemRepository.findByUserId(userService.getCurrent(token).getId());
+    }
+
+    public List<TodoItem> getAllTodos(){
+        return todoItemRepository.findAll();
     }
 
     public TodoItem getOne(Long id){

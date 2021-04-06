@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import static com.example.todo.TaskTestUtils.createMockUser;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -26,7 +26,10 @@ public class AuthContollerTest {
 
     @Test
     public void signup() throws Exception{
-        User user = createMockUser();
+        User user = new User();
+        user.setUsername("mock");
+        user.setPassword("mock");
+        user.setEmail("mock");
         mockMvc.perform(post("/auth/signup")
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(user)))

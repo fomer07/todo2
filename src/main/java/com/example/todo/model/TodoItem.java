@@ -10,6 +10,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "todos")
+
 public class TodoItem {
 
     @Id
