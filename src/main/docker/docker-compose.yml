@@ -1,0 +1,32 @@
+version: '2'
+
+services:
+  app:
+    image: 'springio-todo:lastest'
+    build:
+      context: .
+    container_name: app
+    expose:
+      - 8080
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/docker
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+  db:
+   image: 'postgres:alpine'
+   build:
+     context: .
+   container_name: db
+   environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=docker
+      - PG_DATA=/var/lib/postgresql/data
+   volumes:
+     - /var/lib/postgresql/data
+
+

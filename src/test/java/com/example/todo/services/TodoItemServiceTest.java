@@ -64,8 +64,9 @@ class TodoItemServiceTest {
 
     @Test
     void completedTest(){
+        when(repository.findById(mock.getId())).thenReturn(Optional.ofNullable(mock));
         TodoItem completed = service.completed(mock.getId());
-        assertThat(mock.isDone()).isTrue();
+        assertThat(completed.isDone()).isTrue();
     }
 
     @Test
